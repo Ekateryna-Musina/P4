@@ -120,45 +120,14 @@ module.exports = function(grunt) {
 
     // Create responsive images
     responsive_images: {
-      pizza_image: {
-        options: {
-          sizes: [{
-            width: 115,
-            height: 75,
-            aspectRatio: false
-          },
-          {
-            width: 164,
-            height: 213,
-            aspectRatio: false
-          },
-          {
-            width: 131,
-            height: 170,
-            aspectRatio: false
-          },
-          {
-            width: 67,
-            height: 87,
-            aspectRatio: false
-          },
-          {
-            width: 93,
-            height: 121,
-            aspectRatio: false
-          }]
-        },
-        files: [{
-          expand: true,
-          src: ['pizza.png'],
-          cwd: 'views/images',
-          dest: 'views/images/dist'
-        }]
-      },
       
       pizzeria_image: {
         options: {
-          sizes: [
+          sizes: [{
+            width: 113,
+            height: 61,
+            aspectRatio: false
+          },
           {
             width: 360,
             height: 270,

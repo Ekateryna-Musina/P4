@@ -40,11 +40,11 @@
       <div class="col-md-4">
         <!-- Image credit to: http://commons.wikimedia.org/wiki/File:HK_TST_night_%E5%98%89%E8%98%AD%E9%81%93_Granville_Road_restaurant_Paisano's_Pizzeria_pizza_Dec-2013.JPG -->
         <picture>
-          <source media="(max-width: 320px)" srcset="images/dist/pizzeria-259x194.jpg" />
-          <source media="(max-width: 480px)" srcset="images/dist/pizzeria-420x315.jpg" />
-          <source media="(max-width: 992px)" srcset="images/dist/pizzeria-720x540.jpg" />
-          <source media="(max-width: 1200px)" srcset="images/dist/pizzeria-293x219.jpg" />
-          <img class="img-responsive big-image" alt="papers image" src="images/dist/pizzeria-360x270.jpg" srcset="images/dist/pizzeria-360x270.jpg">
+          <source media="(max-width: 320px)" srcset="images/dist/pizzeria-259x194.jpg?cashebust=01" />
+          <source media="(max-width: 480px)" srcset="images/dist/pizzeria-420x315.jpg?cashebust=02" />
+          <source media="(max-width: 992px)" srcset="images/dist/pizzeria-720x540.jpg?cashebust=03" />
+          <source media="(max-width: 1200px)" srcset="images/dist/pizzeria-293x219.jpg?cashebust=04" />
+          <img class="img-responsive big-image" alt="papers image" src="images/dist/pizzeria-360x270.jpg?cashebust=05" srcset="images/dist/pizzeria-360x270.jpg?cashebust=06">
         </picture>
       </div>
       <div class="col-md-8">
@@ -167,15 +167,17 @@
       loadCssFile('css/style.min.css');
     };
 
-    var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
-    if (raf) {
-      raf(loadCss);
-    } else {
-      window.addEventListener('load', loadCss);
-    }
+    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+         webkitRequestAnimationFrame || msRequestAnimationFrame;
+     if (raf){
+        raf(loadCss);
+      }
+     else {
+       window.addEventListener('load', loadCss);
+     }
   </script>
   <!-- build:js js/main.min.js -->
-  <script async type="text/javascript" src="js/main.js?1234"></script>
+  <script async type="text/javascript" src="js/main.js"></script>
   <!-- /build -->
 </body>
 

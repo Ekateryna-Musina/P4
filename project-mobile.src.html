@@ -10,26 +10,6 @@
     <!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
     <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> -->
 
-    <!-- build:css css/style.min.css -->
-    <link href="css/style.css" rel="stylesheet">
-      <!-- /build -->
-    <!-- build:css css/print.min.css -->
-    <link href="css/print.css" rel="stylesheet">
-    <!-- /build -->
-
-    <script>
-      (function(w,g){w['GoogleAnalyticsObject']=g;
-      w[g]=w[g]||function(){(w[g].q=w[g].q||[]).push(arguments)};w[g].l=1*new Date();})(window,'ga');
-
-      // TODO: replace with your Google Analytics profile ID.
-      ga('create', 'UA-XXXX-Y');
-      ga('send', 'pageview');
-    </script>
-    <script src="http://www.google-analytics.com/analytics.js"></script>
-    
-    <!-- build:js js/perfmatters.min.js -->
-    <script async src="js/perfmatters.js"></script>
-    <!-- /build -->
   </head>
 
   <body>
@@ -56,6 +36,38 @@
     <footer>
       <p>&copy; Web Performance 2014 <span id="crp-stats"></span></p>
     </footer>
+    <script>
+      /* [Mobile devices]Critical css is loaded without blocking the initial render of the critical content.  */
 
+      var loadCssFile = function(name) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = name;
+        var el = document.getElementsByTagName('head')[0];
+        document.getElementsByTagName("head")[0].appendChild(link)
+      };
+      var loadCss = function() {
+        loadCssFile('css/print.min.css');
+        loadCssFile('css/style.min.css');
+      };
+
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+           webkitRequestAnimationFrame || msRequestAnimationFrame;
+       if (raf) raf(loadCss);
+       else window.addEventListener('load', loadCss);
+    </script>
+    
+    <!-- build:js js/perfmatters.min.js -->
+    <script async src="js/perfmatters.js"></script>
+    <!-- /build -->
+    <script>
+      (function(w,g){w['GoogleAnalyticsObject']=g;
+      w[g]=w[g]||function(){(w[g].q=w[g].q||[]).push(arguments)};w[g].l=1*new Date();})(window,'ga');
+
+      // TODO: replace with your Google Analytics profile ID.
+      ga('create', 'UA-XXXX-Y', 'none');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
   </body>
 </html>
