@@ -44,6 +44,7 @@ module.exports = function(grunt) {
   'use strict';
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    
 
     //Process .html file
     processhtml: {
@@ -61,7 +62,7 @@ module.exports = function(grunt) {
       },
       views:{
         files: {
-          'views/pizza.html': ['pizza.src.html']
+          'views/pizza.html': ['views/pizza.src.html']
         }
       }
     },
@@ -99,6 +100,8 @@ module.exports = function(grunt) {
         }]
       }
     },
+    
+    //Minify html files
     htmlmin: {
       dist: {
         options: {
@@ -107,6 +110,9 @@ module.exports = function(grunt) {
         },
         files: {
           'index.html': 'index.html',
+          'project-2048.html': 'project-2048.html',
+          'project-mobile.html': 'project-mobile.html',
+          'project-webperf.html': 'project-webperf.html',
           'views/pizza.html': 'views/pizza.html'
         }
       }
@@ -114,50 +120,91 @@ module.exports = function(grunt) {
 
     // Create responsive images
     responsive_images: {
-      dev_project: {
+      pizza_image: {
         options: {
-          sizes: projectImageSizes
+          sizes: [{
+            width: 115,
+            height: 75,
+            aspectRatio: false
+          },
+          {
+            width: 164,
+            height: 213,
+            aspectRatio: false
+          },
+          {
+            width: 131,
+            height: 170,
+            aspectRatio: false
+          },
+          {
+            width: 67,
+            height: 87,
+            aspectRatio: false
+          },
+          {
+            width: 93,
+            height: 121,
+            aspectRatio: false
+          }]
         },
         files: [{
           expand: true,
-          src: ['*.{jpg,gif,png}'],
-          cwd: 'img',
-          dest: 'img/prod'
+          src: ['pizza.png'],
+          cwd: 'views/images',
+          dest: 'views/images/dist'
         }]
       },
-
-      dev_main: {
+      
+      pizzeria_image: {
         options: {
-          sizes: mainImageSizes
+          sizes: [
+          {
+            width: 360,
+            height: 270,
+            aspectRatio: false
+          },
+          {
+            width: 293,
+            height: 219,
+            aspectRatio: false
+          },
+          {
+            width: 720,
+            height: 540,
+            aspectRatio: false
+          },
+          {
+            width: 420,
+            height: 315,
+            aspectRatio: false
+          },
+          {
+            width: 259,
+            height: 194,
+            aspectRatio: false
+          }]
         },
         files: [{
           expand: true,
-          src: ['*.{jpg,gif,png}'],
+          src: ['pizzeria.jpg'],
           cwd: 'views/images',
-          dest: 'views/images/prod'
+          dest: 'views/images/dist'
         }]
       }
     },
 
-    // Minify images
-    imagemin: {
-      target1: {
-        files: [{
-          expand: true,
-          cwd: 'img/prod',
-          src: ['**/*.{png,jpg,gif}'],
-          dest: 'img/prod'
-        }]
-      },
-      target2: {
-        files: [{
-          expand: true,
-          cwd: 'views/images/prod',
-          src: ['**/*.{png,jpg,gif}'],
-          dest: 'views/images/prod'
-        }]
-      }
-    }
+    // // Minify images
+    // imagemin: {
+    //   target: {
+    //     files: [{
+    //     expand: true,                  // Enable dynamic expansion
+    //     cwd: 'views/images/',                   // Src matches are relative to this path
+    //     src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
+    //     dest: 'views/images/dist'                  // Destination path prefix
+    //   }]
+    //   }
+    // }
   });
 
   // Load grunt tasks
@@ -171,5 +218,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-processhtml');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
 
-  grunt.registerTask('default', ['uglify', 'cssmin', 'processhtml', 'htmlmin']);
+  grunt.registerTask('default', ['uglify', 'cssmin', 'processhtml', 'htmlmin', 'responsive_images']);
 };

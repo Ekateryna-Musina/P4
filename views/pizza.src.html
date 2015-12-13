@@ -39,8 +39,15 @@
       </div>
     </div>
     <div id="callToAction" class="row">
-      <div class="col-md-4">
-        <img src="images/pizzeria.jpg" class="img-responsive"> <!-- Image credit to: http://commons.wikimedia.org/wiki/File:HK_TST_night_%E5%98%89%E8%98%AD%E9%81%93_Granville_Road_restaurant_Paisano's_Pizzeria_pizza_Dec-2013.JPG -->
+      <div class="col-md-4">      
+        <!-- Image credit to: http://commons.wikimedia.org/wiki/File:HK_TST_night_%E5%98%89%E8%98%AD%E9%81%93_Granville_Road_restaurant_Paisano's_Pizzeria_pizza_Dec-2013.JPG -->  
+        <picture class="img-responsive">
+          <source media="(max-width: 320px)" srcset="images/dist/pizzeria-259x194.jpg" />
+          <source media="(max-width: 480px)" srcset="images/dist/pizzeria-420x315.jpg" />
+          <source media="(max-width: 992px)" srcset="images/dist/pizzeria-720x540.jpg" />
+          <source media="(max-width: 1200px)" srcset="images/dist/pizzeria-293x219.jpg" />
+          <img class="big-image img-responsive" alt="papers image" src="images/dist/pizzeria-360x270.jpg" srcset="images/dist/pizzeria-360x270.jpg">
+        </picture>
       </div>
       <div class="col-md-8">
         <div class="row">
@@ -141,6 +148,7 @@
     </div>
     <div id="footer" class="col-md-12">Thanks for visiting! &copy; 2014 Udacity</div>
   </div>
+  
   <!-- build:js js/main.min.js -->
   <script type="text/javascript" src="js/main.js"></script>
   <!-- /build -->
