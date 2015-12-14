@@ -473,7 +473,6 @@ var resizePizzas = function(size) {
     return dx;
   }
 
-
   function changePizzaSizes(size) {
     for (var i = 0; i < randomPizzaContainerList.length; i++) {
       var dx = determineDx(randomPizzaContainerList[i], size);
@@ -497,11 +496,6 @@ window.performance.mark("mark_start_generating"); // collect timing data
 var pizzasDiv = document.getElementById("randomPizzas");
 var randomPizzaContainerList = [];
 
-for (var i = 2; i < 200; i++) {
-  var pizza = pizzaElementGenerator(i);
-  randomPizzaContainerList.push(pizza);
-  pizzasDiv.appendChild(pizza);
-}
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
@@ -526,8 +520,6 @@ function logAverageFrame(times) { // times is the array of User Timing measureme
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 var scrollTop = 0;
-var ticking = false;
-var pizzaCount = 5;
 var items = [];
 
 // Moves the sliding background pizzas based on scroll position
@@ -541,9 +533,22 @@ function updatePositions() {
   }
 }
 
+// Creation of random pizzas moved to scroll event to prevent render blocking javascript
+var createPizzaList = function createPizzaList() {
+  var itemsCount = randomPizzaContainerList.length;
+  if (itemsCount + 5 < 200) {
+    for (var i = itemsCount; i < itemsCount + 5; i++) {
+      var pizza = pizzaElementGenerator(i);
+      randomPizzaContainerList.push(pizza);
+      pizzasDiv.appendChild(pizza);
+    }
+  }
+}
+
 var scrollHandler = function scrollHandler() {
   scrollTop = document.body.scrollTop;
   updatePositions();
+  createPizzaList();
 }
 
 window.addEventListener('scroll', scrollHandler, false);
@@ -552,6 +557,7 @@ var generateItems = function generateItems() {
   var cols = 8;
   var s = 256;
   var movingPizzas1 = document.querySelector("#movingPizzas1");
+  //Number of moving pizzas changed from 200 to 40
   for (var i = 0; i < 40; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -565,5 +571,5 @@ var generateItems = function generateItems() {
     items.push(elem);
   }
 }
-
+// Removed page load event listender 
 generateItems();
