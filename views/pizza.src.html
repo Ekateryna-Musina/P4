@@ -5,6 +5,12 @@
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- build:css css/style.min.css -->
+    <link rel="stylesheet" href="css/style.css">
+  <!-- /build -->
+  <!-- build:css css/bootstrap-grid.min.css -->
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <!-- /build -->
 </head>
 
 <body>
@@ -40,11 +46,11 @@
       <div class="col-md-4">
         <!-- Image credit to: http://commons.wikimedia.org/wiki/File:HK_TST_night_%E5%98%89%E8%98%AD%E9%81%93_Granville_Road_restaurant_Paisano's_Pizzeria_pizza_Dec-2013.JPG -->
         <picture>
-          <source media="(max-width: 320px)" srcset="images/dist/pizzeria-259x194.jpg?cashebust=01" />
-          <source media="(max-width: 480px)" srcset="images/dist/pizzeria-420x315.jpg?cashebust=02" />
-          <source media="(max-width: 992px)" srcset="images/dist/pizzeria-720x540.jpg?cashebust=03" />
-          <source media="(max-width: 1200px)" srcset="images/dist/pizzeria-293x219.jpg?cashebust=04" />
-          <img class="img-responsive big-image" alt="papers image" src="images/dist/pizzeria-360x270.jpg?cashebust=05" srcset="images/dist/pizzeria-360x270.jpg?cashebust=06">
+          <source media="(max-width: 320px)" srcset="images/dist/pizzeria-259x194.jpg" />
+          <source media="(max-width: 480px)" srcset="images/dist/pizzeria-420x315.jpg" />
+          <source media="(max-width: 992px)" srcset="images/dist/pizzeria-720x540.jpg" />
+          <source media="(max-width: 1200px)" srcset="images/dist/pizzeria-293x219.jpg" />
+          <img class="img-responsive big-image" alt="papers image" src="images/dist/pizzeria-360x270.jpg" srcset="images/dist/pizzeria-360x270.jpg">
         </picture>
       </div>
       <div class="col-md-8">
@@ -152,33 +158,9 @@
     </div>
     <div id="footer" class="col-md-12">Thanks for visiting! &copy; 2014 Udacity</div>
   </div>
-  <script>
-    /* [Mobile devices]Critical css is loaded without blocking the initial render of the critical content.  */
 
-    var loadCssFile = function(name) {
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = name;
-      var el = document.getElementsByTagName('head')[0];
-      document.getElementsByTagName("head")[0].appendChild(link)
-    };
-    var loadCss = function() {
-      loadCssFile('css/bootstrap-grid.min.css');
-      loadCssFile('css/style.min.css');
-    };
+  <script async type="text/javascript" src="js/main.min.js"></script>
 
-    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-         webkitRequestAnimationFrame || msRequestAnimationFrame;
-     if (raf){
-        raf(loadCss);
-      }
-     else {
-       window.addEventListener('load', loadCss);
-     }
-  </script>
-  <!-- build:js js/main.min.js -->
-  <script async type="text/javascript" src="js/main.js"></script>
-  <!-- /build -->
 </body>
 
 </html>
