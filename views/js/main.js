@@ -379,6 +379,8 @@ var makeRandomPizza = function() {
   return pizza;
 };
 
+var randomPizzaContainerList = Array.prototype.slice.call(document.getElementsByClassName("randomPizzaContainer"));
+
 // returns a DOM element for each pizza
 var pizzaElementGenerator = function(i) {
   var pizzaContainer, // contains pizza title, image and list of ingredients
@@ -442,7 +444,7 @@ function changeSliderLabel(size) {
   }
 }
 
-// TODO: change to 3 sizes? no more xl?
+// Added ExtraLarge size
 // Changes the slider value to a percent width
 function getPizzaWidth(size) {
   switch (size) {
@@ -483,7 +485,6 @@ window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
 var pizzasDiv = document.getElementById("randomPizzas");
-var randomPizzaContainerList = [];
 
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
