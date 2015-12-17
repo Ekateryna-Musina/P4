@@ -469,7 +469,7 @@ function changePizzaSizes(size) {
   }
 }
 
-var pizzaSizeElement = document.querySelector("#pizzaSize");
+var pizzaSizeElement = document.getElementById("pizzaSize");
 var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize"); // User Timing API function
   changeSliderLabel(size);
@@ -544,21 +544,27 @@ var scrollHandler = function scrollHandler() {
 window.addEventListener('scroll', scrollHandler, false);
 
 var generateItems = function generateItems() {
-  var cols = 8;
   var s = 256;
-  var movingPizzas1 = document.querySelector("#movingPizzas1");
-  //Number of moving pizzas changed from 200 to 40
-  for (var i = 0; i < 40; i++) {
-    var elem = document.createElement('img');
-    elem.className = 'mover';
-    elem.src = "images/pizza.png";
-    elem.style.height = "100px";
-    elem.style.width = "73.333px";
-
-    elem.basicLeft = (i % cols) * s;
-    elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    movingPizzas1.appendChild(elem);
-    items.push(elem);
+  var pizzaCellHeight = 100;
+  var pizzaCellWidth = 73.333;
+  var rows = ~~(window.screen.height/pizzaCellHeight);
+  var cols = 8;
+  
+  var movingPizzas1 = document.getElementById("movingPizzas1");
+  
+  for (var i = 0; i < rows; i++) {
+    for (var j = 0; j < cols; j++){
+      var elem = document.createElement('img');
+      elem.className = 'mover';
+      elem.src = "images/pizza.png";
+      elem.style.height = pizzaCellHeight + "px";
+      elem.style.width = pizzaCellWidth + "px";
+      
+      elem.basicLeft = j * s;
+      elem.style.top = (i * s) + 'px';
+      movingPizzas1.appendChild(elem);
+      items.push(elem);
+    }
   }
 }
 // Removed page load event listender 
