@@ -58,7 +58,15 @@ function getPizzaWidth(size) {
 var items = document.querySelectorAll('.mover');
 ```
 
-and it was moved outside the method, because it does the same expensive select every time. 3. All pizza recipes are not generated all at once on load event. It is not necessary but affects page load performance. So on page load I've generate only 5 pizza recipes then after page loaded on each scroll event the others portions will be generated. 4. **generateItems** method has been optimized to generate appropriate number of moving pizza that depends on actual window height. 5. **querySelector** method has been replaced with much faster **getElementById**. 6. Removed unnecessary selectors from loop that did the same select each iteration, e.g:
+and it was moved outside the method, because it does the same expensive select every time.
+
+2. All pizza recipes are not generated all at once on load event. It is not necessary but affects page load performance.
+So on page load I've generate only 5 pizza recipes then after page loaded on each scroll event the others portions
+will be generated.
+3. **generateItems** method has been optimized to generate appropriate number of moving pizza that depends on actual
+window height.
+4. **querySelector** method has been replaced with much faster **getElementById**.
+5. Removed unnecessary selectors from loop that did the same select each iteration, e.g:
 
 ```
 
@@ -75,4 +83,19 @@ var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
+```
+6. Strict mode has been to prevent bad syntax and loading unnecessary variables.
+
+7. Array length saved to local variable, so the  array's length property is not accessed to check its value at 
+each iteration. (i.e. more efficiency)
+```
+  var len = randomPizzaContainerList.length;
+  for (var i = 0; i < len; i++) {
+```
+
+8. Declaring the variable (e.g. var phase;) outside the loop will prevent it from being created every time 
+the loop is executed.
+```
+  var phase;
+  for (var i = 0; i < items.length; i++) {
 ```

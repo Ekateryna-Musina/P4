@@ -18,6 +18,10 @@ cameron *at* udacity *dot* com
 
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
+
+//enable the strict mode
+"use strict";
+
 var pizzaIngredients = {};
 pizzaIngredients.meats = [
   "Pepperoni",
@@ -463,7 +467,9 @@ function getPizzaWidth(size) {
 
 function changePizzaSizes(size) {  
   var newSize= getPizzaWidth(size);
-  for (var i = 0; i < randomPizzaContainerList.length; i++) {
+  // array length, which is part of the condition statement, in a local variable
+  var len = randomPizzaContainerList.length;
+  for (var i = 0; i < len; i++) {
   
     randomPizzaContainerList[i].style.width = newSize;
   }
@@ -486,26 +492,11 @@ window.performance.mark("mark_start_generating"); // collect timing data
 // This for-loop actually creates and appends all of the pizzas when the page loads
 var pizzasDiv = document.getElementById("randomPizzas");
 
-
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
 window.performance.measure("measure_pizza_generation", "mark_start_generating", "mark_end_generating");
 var timeToGenerate = window.performance.getEntriesByName("measure_pizza_generation");
 console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "ms");
-
-// Iterator for number of times the pizzas in the background have scrolled.
-// Used by updatePositions() to decide when to log the average time per frame
-var frame = 0;
-
-// Logs the average amount of time per 10 frames needed to move the sliding background pizzas on scroll.
-function logAverageFrame(times) { // times is the array of User Timing measurements from updatePositions()
-  var numberOfEntries = times.length;
-  var sum = 0;
-  for (var i = numberOfEntries - 1; i > numberOfEntries - 11; i--) {
-    sum = sum + times[i].duration;
-  }
-  console.log("Average time to generate last 10 frames: " + sum / 10 + "ms");
-}
 
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
@@ -514,11 +505,10 @@ var items = [];
 
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
-  frame++;
-  var currentScrollTop = scrollTop;
-
+  //Declaring the phase variable outside the loop
+  var phase;
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((currentScrollTop / 1250) + (i % 5));
+    phase = Math.sin((scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 }
@@ -533,13 +523,13 @@ var createPizzaList = function createPizzaList() {
       pizzasDiv.appendChild(pizza);
     }
   }
-}
+};
 
 var scrollHandler = function scrollHandler() {
   scrollTop = document.body.scrollTop;
   updatePositions();
   createPizzaList();
-}
+};
 
 window.addEventListener('scroll', scrollHandler, false);
 
@@ -551,10 +541,11 @@ var generateItems = function generateItems() {
   var cols = 8;
   
   var movingPizzas1 = document.getElementById("movingPizzas1");
-  
+  //Declaring the elem variable outside the loop will prevent it from being created every time the loop is executed.
+  var elem;
   for (var i = 0; i < rows; i++) {
     for (var j = 0; j < cols; j++){
-      var elem = document.createElement('img');
+      elem = document.createElement('img');
       elem.className = 'mover';
       elem.src = "images/pizza.png";
       elem.style.height = pizzaCellHeight + "px";
