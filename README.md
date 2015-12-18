@@ -20,15 +20,15 @@ Steps taken to optimize index.html
 <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 ```
 
-1.	Referenced css files have been minified using **grunt-contrib-cssmin** task. Also referenced *perfmatters.js* script has been inlined in Index.html .
+2.	Referenced css files have been minified using **grunt-contrib-cssmin** task. Also referenced *perfmatters.js* script has been inlined in Index.html .
 
-2.	**grunt-processhtml** task transforms *Index.src.html* to *Index.html* file by replacing all references to css and js files with appropriate minified css and uglified js files references and also minified with and **grunt-contrib-htmlmin** minifies this file.
+3.	**grunt-processhtml** task transforms *Index.src.html* to *Index.html* file by replacing all references to css and js files with appropriate minified css and uglified js files references and also minified with and **grunt-contrib-htmlmin** minifies this file.
 
-3.	**async** keyword has been added for loading *analytics.js* script.
+4.	**async** keyword has been added for loading *analytics.js* script.
 
-4.	*pizzeria.jpg* image has been resized and minified with **grunt-responsive-images** and **grunt-contrib-imagemin** grant tasks.
+5.	*pizzeria.jpg* image has been resized and minified with **grunt-responsive-images** and **grunt-contrib-imagemin** grant tasks.
 
-5.	Render-blocking java script and css removed from the page head. Added media to prevent load print css.
+6.	Render-blocking java script and css removed from the page head. Added media to prevent load print css.
 
 
 Steps taken to optimize main.js
