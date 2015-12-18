@@ -55,7 +55,7 @@
         </li>
       </ul>
     </div>
-
+</div>
     <footer>
       <p>&copy; Web Performance 2014
         <span id="crp-stats"></span>
@@ -63,17 +63,17 @@
     </footer>
     <script>
       /* [Mobile devices]Critical css is loaded without blocking the initial render of the critical content.  */
-
-      var loadCssFile = function(name) {
+      var loadCssFile = function(name, media) {
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = name;
-        var el = document.getElementsByTagName('head')[0];
-        document.getElementsByTagName("head")[0].appendChild(link)
+        link.media = media;
+        var head= document.getElementsByTagName("head")[0];
+        head.parentNode.insertBefore(link, head);
       };
       var loadCss = function() {
-        loadCssFile('css/print.min.css');
-        loadCssFile('css/style.min.css');
+        loadCssFile('css/style.min.css', 'screen');
+        loadCssFile('css/print.min.css', 'print');
       };
 
       var raf = requestAnimationFrame || mozRequestAnimationFrame ||
@@ -81,10 +81,17 @@
        if (raf) raf(loadCss);
        else window.addEventListener('load', loadCss);
     </script>
-    
-    <!-- build:js js/perfmatters.min.js -->
-    <script async src="js/perfmatters.js"></script>
-    <!-- /build -->
+    <script async>
+      function logCRP() {
+        var t = window.performance.timing,
+                dcl = t.domContentLoadedEventStart - t.domLoading,
+                complete = t.domComplete - t.domLoading;
+        var stats = document.getElementById("crp-stats");
+        stats.textContent = 'DCL: ' + dcl + 'ms, onload: ' + complete + 'ms';
+      };
+
+      window.addEventListener('load', logCRP);
+    </script>
     <script>
       (function(w,g){w['GoogleAnalyticsObject']=g;
       w[g]=w[g]||function(){(w[g].q=w[g].q||[]).push(arguments)};w[g].l=1*new Date();})(window,'ga');

@@ -1,44 +1,6 @@
 var port = 8080;
 var ngrok = require('ngrok');
 
-//Project images sizes
-var projectImageSizes = [{
-  width: 358,
-  height: 190,
-  aspectRatio: false
-}, {
-  width: 259,
-  height: 150,
-  aspectRatio: false
-}, {
-  width: 333,
-  height: 190,
-  aspectRatio: false
-}, {
-  width: 690,
-  height: 421,
-  aspectRatio: false
-}, {
-  width: 273,
-  height: 161,
-  aspectRatio: false
-}];
-
-//Main images sizes
-var mainImageSizes = [{
-  width: 1134,
-  height: 500,
-  aspectRatio: false
-}, {
-  width: 836,
-  height: 450,
-  aspectRatio: false
-}, {
-  width: 696,
-  height: 350,
-  aspectRatio: false
-}];
-
 
 module.exports = function(grunt) {
   'use strict';
@@ -161,6 +123,7 @@ module.exports = function(grunt) {
           dest: 'views/images/dist'
         }]
       }
+
     },
 
     imagemin: {                          // Task
@@ -171,7 +134,15 @@ module.exports = function(grunt) {
             src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
             dest: 'views/images/dist/'                  // Destination path prefix
           }]
-        }
+        },
+      profile: {                         // Another target
+        files: [{
+          expand: true,                  // Enable dynamic expansion
+          cwd: 'img',                   // Src matches are relative to this path
+          src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
+          dest: 'img'                  // Destination path prefix
+        }]
+      }
       }
 
   });
